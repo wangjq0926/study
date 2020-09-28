@@ -12,7 +12,7 @@ data:
   application.properties: |
     env=local
     msg=this is local env properteis.
-  mysql.properteis: |
+  mysql.properties: |
     mysql.hostname=10.10.10.10
     mysql.port=3333
 ---
