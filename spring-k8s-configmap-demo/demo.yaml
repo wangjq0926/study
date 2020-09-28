@@ -71,6 +71,6 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-      nodePort: 32808
+      nodePort: 31808
   selector:
     app: spring-boot-demo
