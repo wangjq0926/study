@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-demo
-        image: spring-boot-demo:latest
+        image: 10.15.15.247/primeton-caas/spring-boot-demo:latest
         imagePullPolicy: IfNotPresent
         args: ["--spring.config.location=application.properties,mysql.properties"]
         ports:
