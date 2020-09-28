@@ -46,17 +46,17 @@ spec:
           mountPath: /opt/application.properties
           subPath: application.properties
         - name: spring-boot-demo-config
-          mountPath: /opt/mysql.properties 
-          subPath: mysql.properties   
+          mountPath: /opt/mysql.properties
+          subPath: mysql.properties
       volumes:
       - name: spring-boot-demo-config
         configMap:
           name: spring-boot-demo-configmap
           items:
             - key: application.properties
-              path: application.properties 
+              path: application.properties
             - key: mysql.properties
-              path: mysql.properties  
+              path: mysql.properties
 ---
 apiVersion: v1
 kind: Service
@@ -66,7 +66,7 @@ metadata:
   labels:
     app: spring-boot-demo
 spec:
-  type: NodePort 
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8080
