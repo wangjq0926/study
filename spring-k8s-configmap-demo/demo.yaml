@@ -6,7 +6,7 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: demo-configmap
+  name: spring-boot-demo-configmap
   namespace: wangjq
 data:
   application.properties: |
@@ -19,39 +19,39 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-springboot
+  name: spring-boot-demo
   namespace: wangjq
   labels:
-    app: demo-springboot
+    app: spring-boot-demo
 spec:
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: demo-springboot
+      app: spring-boot-demo
   template:
     metadata:
       labels:
-        app: demo-springboot
+        app: spring-boot-demo
     spec:
       containers:
-      - name: demo
-        image: demo:1.0
+      - name: spring-boot-demo
+        image: spring-boot-demo:latest
         imagePullPolicy: IfNotPresent
         args: ["--spring.config.location=application.properties,mysql.properties"]
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: demo-config
+        - name: spring-boot-demo-config
           mountPath: /opt/application.properties
           subPath: application.properties
-        - name: demo-config
+        - name: spring-boot-demo-config
           mountPath: /opt/mysql.properties 
           subPath: mysql.properties   
       volumes:
-      - name: demo-config
+      - name: spring-boot-demo-config
         configMap:
-          name: demo-configmap
+          name: spring-boot-demo-configmap
           items:
             - key: application.properties
               path: application.properties 
@@ -61,16 +61,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-springboot
+  name: spring-boot-demo
   namespace: wangjq
   labels:
-    app: demo-springboot
+    app: spring-boot-demo
 spec:
   type: NodePort 
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-      nodePort: 32123
+      nodePort: 32808
   selector:
-    app: demo-springboot
+    app: spring-boot-demo
